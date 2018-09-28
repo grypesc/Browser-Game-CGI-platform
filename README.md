@@ -1,1 +1,1 @@
-# NodeJS-Pixi.JS-game
+# NodeJS-PixiJS-game
