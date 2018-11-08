@@ -33,11 +33,13 @@ class Map {
     }
       this.createArea(new Point(1, 1), 50, 0.75, sand);
       this.createArea(new Point(10, 30), 200, 0.75, sand);
+      this.createArea(new Point(97, 50), 1000, 0.65, sand);
+      this.createArea(new Point(97, 97), 1000, 0.90, water);
       this.createArea(new Point(20, 30), 200, 0.75, water);
       this.createArea(new Point(20, 5), 100, 0.75, water);
       this.createArea(new Point(50, 50), 800, 0.60, water);
       this.createArea(new Point(50, 90), 800, 0.60, lava);
-      this.createArea(new Point(2, 2), 6, 0.60, lava);
+      this.createArea(new Point(2, 2), 30, 0.60, lava);
       }
 
 

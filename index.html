@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Gaem</title>
+<title>Game</title>
 <link rel="stylesheet" href="menu.css">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,24 +9,26 @@
 <body>
 
 <header>
-  <h2>Welcome to a survival game</h2>
+  <h2>Welcome to a shooting game</h2>
 </header>
 
 <section>
   <enterGameBox>
       <form action='checkName.cgi' method="post">
-        <h4>Enter your nick</h4><br>
-        <input type="text"  value="" name="nick">
-        <input type="submit" value="Ok!">
+        <h3>Enter your nick</h3><br>
 
+        <input type="text"  value="" name="nick"><p></p>
+
+        <input type="submit" value="Ok!"><p></p>
       </form>
-      <button type="button">Help</button>
+      <input type="submit" value="Help"  onclick="window.location='help.html';" /><p></p>
+      <input type="submit" value="Source code"  onclick="window.location='sources.html';" />
   </enterGameBox>
 
   <article>
     <h1>About</h1>
     <p>This is a 2d shooting game. Server is implemented in node.js, while client side in Javascript and Perl/CGI.</p>
-    <p>Graphic library is PIXI.js. Enjoy your stay. Peace.</p>
+    <p>Graphic library is PIXI.js. Enjoy your stay. Don't try this at home. Peace.</p>
   </article>
 </section>
 

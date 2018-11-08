@@ -6,7 +6,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   padding: 40px;
-  width: 1000px;
+  width: 1200px;
   height: 800px;
   background-color: #262626;
 }
@@ -20,25 +20,55 @@ header {
   color: white;
 }
 
+input[type=text] {
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    color: black;
+    padding: 4px 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 200px;
+}
+input[type=submit] {
+    background-color: #777;
+    border-radius: 16px;
+    color: white;
+    padding: 5px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 /* Create two columns/boxes that floats next to each other */
 enterGameBox {
   float: left;
-  width: 20%;
-  height: 300px; /* only for demonstration, should be removed */
+  width: 25%;
+  height: 300px;
   background: lightgrey;
+  align-content: center;
+  text-align: center;
+  margin: auto;
 }
-
-
-
 
 article {
   float: right;
-  width: 80%;
+  width: 75%;
   background-color: #f1f1f1;
   height: 300px; /* only for demonstration, should be removed */
   text-indent: 50px;
+  image-orientation:
 }
 
+sources {
+  float: left;
+  background-color: white;
+  height: 300px; /* only for demonstration, should be removed */
+  width: 100%;
+  text-indent: 0px;
+}
 /* Clear floats after the columns */
 section:after {
   content: "";
@@ -46,15 +76,22 @@ section:after {
   clear: both;
 }
 
-/* Style the footer */
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 10px;
+}
+
+
 footer {
   background-color: #777;
   padding: 10px;
   text-align: center;
+  line-height: 150px;
   color: white;
   height: 200px
 }
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-
 </style>

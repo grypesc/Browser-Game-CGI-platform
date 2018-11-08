@@ -11,124 +11,20 @@
 
 <body>
   <script>
-  "use strict";
+"use strict";
 
-  let type = "WebGL"
-  if(!PIXI.utils.isWebGLSupported()){
-    type = "canvas"
-  }
+let controller = new Controller();
 
-  let controller = new Controller();
-
-  let app = new PIXI.Application({
-    width: controller.width,
-    height: controller.height,
-    antialias: true,
-    transparent: false,
-    resolution: 1
-  }
-);
-
-document.body.appendChild(app.view);
-PIXI.loader
-.add("static/client/sprites/grass.png")
-.add("static/client/sprites/sand.png")
-.add("static/client/sprites/edge.png")
-.add("static/client/sprites/water.png")
-.add("static/client/sprites/lava.png")
-.add("static/client/sprites/player.png")
-.add("static/client/sprites/hand.png")
-.add("static/client/sprites/bullet.png")
-.add("static/client/sprites/dead.png")
-.load(setup);
-
-
+</script><script src="static/client/view.js"></script><script>
 function Terrain(pathArg)  {
   this.path=pathArg;
 }
-
+document.body.appendChild(app.view);
 
 let gameMap = new GameMap();
 let players = [];
 let bullets = [];
 let currentPlayer = new CurrentPlayer();
-
-
-function setup() {
-  controller.newPlayer();
-  controller.emitInput();
-  controller.listenToUpdate();
-  controller.listenToDeath();
-  app.ticker.add(delta => gameLoop(delta));
-}
-
-function gameLoop(delta){
-  app.stage.removeChildren();
-  if (controller.mode == 'dead')
-  {
-    let deadSprite = new PIXI.Sprite(PIXI.loader.resources['static/client/sprites/dead.png'].texture);
-    deadSprite.position.set(0,0);
-    app.stage.addChild(deadSprite);
-    return;
-  }
-
-  for (let i = 0; i < 17; i++) {
-    for (let j = 0; j < 21; j++) {
-      let square = new PIXI.Sprite(PIXI.loader.resources[gameMap.square[i][j].path].texture);
-      square.x=controller.squareWidthInPixels*j-currentPlayer.xAbsolute%50;
-      square.y=controller.squareHeightInPixels*i-currentPlayer.yAbsolute%50;
-      app.stage.addChild(square);
-    }
-  }
-  for (let id in players) {
-    let player = players[id];
-    let playerSprite = new PIXI.Sprite(PIXI.loader.resources['static/client/sprites/player.png'].texture);
-    playerSprite.anchor.set(0.5,0.5);
-    playerSprite.position.set(player.x,player.y);
-    app.stage.addChild(playerSprite);
-
-    let handSprite = new PIXI.Sprite(PIXI.loader.resources['static/client/sprites/hand.png'].texture);
-    handSprite.anchor.set=(0.5,0.5);
-    handSprite.rotation = player.direction;
-    handSprite.x=player.x+30*Math.cos(player.direction);
-    handSprite.y=player.y+30*Math.sin(player.direction);
-    app.stage.addChild(handSprite);
-
-    let name = new PIXI.Text(player.name);
-    name.style = {fill: 'white', stroke: 'black', strokeThickness: 2};
-    name.anchor.set(0.5,0.5);
-    name.position.set(player.x, player.y-55);
-    app.stage.addChild(name);
-
-    let redBar = new PIXI.Graphics();
-    redBar.lineStyle(1, 0x000000, 1);
-    redBar.beginFill(0xFF0000);
-    redBar.drawRect(player.x-40, player.y-40, 80, 10);
-    redBar.endFill();
-    app.stage.addChild(redBar);
-
-    let greenBar = new PIXI.Graphics();
-    greenBar.lineStyle(1, 0x000000, 1);
-    greenBar.beginFill(0x008111);
-    greenBar.drawRect(player.x-40, player.y-40, Math.max(0,player.health*(80/1000)), 10);
-    greenBar.endFill();
-    app.stage.addChild(greenBar);
-
-
-  }
-
-  let length = bullets.length;
-  for (let i=0; i<length; i++){
-    let bulletSprite = new PIXI.Sprite(PIXI.loader.resources['static/client/sprites/bullet.png'].texture);
-
-    bulletSprite.anchor.set(0.5,0.5);
-    bulletSprite.x = bullets[i].x-currentPlayer.xAbsolute+500;
-    bulletSprite.y = bullets[i].y-currentPlayer.yAbsolute+400;
-    app.stage.addChild(bulletSprite);
-  }
-
-
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 let socket = io();
@@ -177,13 +73,12 @@ document.addEventListener('keyup', function(event) {
 });
 
 document.addEventListener('mousemove', function(event) {
-  let arg=(event.y-400 - controller.padding)/(event.x-500-controller.padding);
-  if (event.x>=500 +controller.padding )
+  let arg=(event.y-controller.height/2 - controller.padding)/(event.x-controller.width/2-controller.padding);
+  if (event.x>=controller.width/2 +controller.padding )
     currentPlayer.direction = Math.atan(arg);
   else
     currentPlayer.direction = Math.PI-Math.atan((-1)*arg);
   input.direction=currentPlayer.direction;
-
   }
 );
 
