@@ -12,8 +12,8 @@
 <body>
   <script>
 "use strict";
-
-let controller = new Controller();
+let leaderboard = [];
+var controller = new Controller();
 
 </script><script src="static/client/view.js"></script><script>
 function Terrain(pathArg)  {
@@ -24,6 +24,7 @@ document.body.appendChild(app.view);
 let gameMap = new GameMap();
 let players = [];
 let bullets = [];
+let items = [];
 let currentPlayer = new CurrentPlayer();
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -82,10 +83,12 @@ document.addEventListener('mousemove', function(event) {
   }
 );
 
-document.addEventListener("click", function() {
+document.addEventListener("mousedown", function() {
     input.LMB=true;
 });
-
+document.addEventListener("mouseup", function() {
+    input.LMB=false;
+});
 
 </script>
 

@@ -23,7 +23,6 @@ if ((length $nick) > 20 || (length $nick) < 2) {
   }
 
 if($isNameOK==1) {
-$cookie1 = new CGI::Cookie(-name=>'ID',-value=>loool);
 
   $gameBoxContent="<h3>Hello $nick</h3>
   <form action='http://155.230.194.245:54070' method=\"post\">
@@ -46,7 +45,7 @@ print <<"EOP";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Gaem</title>
+  <title>Game</title>
   <link rel="stylesheet" href="menu.css">
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,7 +66,7 @@ print <<"EOP";
   <article>
   <h1>About</h1>
   <p>This is a 2d shooting game. Server is implemented in node.js, while client side in Javascript and Perl/CGI.</p>
-  <p>Graphic library is PIXI.js. Enjoy your stay. Peace.</p>
+  <p>Graphic library is PIXI.js. Enjoy your stay. Don't try this at home. Peace.</p>
   </article>
   </section>
 

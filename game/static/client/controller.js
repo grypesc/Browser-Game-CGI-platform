@@ -18,18 +18,19 @@ class Controller {
   emitInput() {
     setInterval(function() {
       socket.emit('input', input);
-      input.LMB=false;
     }, 1000 / 60);
   }
 
 
   listenToUpdate() {
-    socket.on('update', function(newPlayers, newcurrentPlayer, newAbsoluteCurrentPlayer, currentPlayerMap, bulletsArg) {
+    socket.on('update', function(newPlayers, newCurrentPlayer, newAbsoluteCurrentPlayer, currentPlayerMap, bulletsArg, itemsArg, leaderboard2) {
       players = newPlayers;
-      currentPlayer=newcurrentPlayer;
+      currentPlayer=newCurrentPlayer;
+        leaderboard = leaderboard2;
       currentPlayer.xAbsolute=newAbsoluteCurrentPlayer.x;
       currentPlayer.yAbsolute=newAbsoluteCurrentPlayer.y;
       bullets=bulletsArg;
+      items = itemsArg;
 
       for (var i = 0; i < 17; i++) {
         for (var j = 0; j < 21; j++) {
@@ -44,12 +45,12 @@ class Controller {
   listenToDeath() {
     socket.on('death', function() {
       setTimeout(function(){ controller.mode = "dead"; }, 1000);
-      setTimeout(function(){ if (window.confirm("Ooops, you were owned. Don't you want to cancel not being not owned again?"))
-                           { window.location.href='http://widit.knu.ac.kr/~rypesc/';
+      setTimeout(function(){ if (window.confirm("Ooops, you were owned. Are you a noob?"))
+                           { window.location.href='https://rickrolled.fr/';
                            }
                              else
                              {
-                               window.location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+                               window.location.href='https://rickrolled.fr/';
                              }; }, 1500);
     }
 
@@ -71,7 +72,6 @@ class GameMap  {
       }
     }
   }
-
 }
 
 class Player {
@@ -101,4 +101,12 @@ class Bullet {
     this.range = 100;
     this.distanceTraveled = 0;
   };
+}
+
+class Entry {
+  constructor(name, socketId, score) {
+    this.name = name;
+    this.socketId = socketId;
+    this.score = score;
+  }
 }
